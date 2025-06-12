@@ -4,7 +4,7 @@ const {
   createPost,
   updatePost,
   deletePost,
-  // getAllPosts, // Tạm thời comment lại để test
+  getAllPosts,
   getPostBySlug,
   getPostsByTag,
   searchPosts,
@@ -24,10 +24,7 @@ const adminOnly = (req, res, next) => {
 };
 
 router.post("/", protect, adminOnly, createPost);
-// Thay thế getAllPosts bằng handler test
-router.get("/", (req, res) => {
-  res.json({ message: "Test OK" });
-});
+router.get("/", getAllPosts);
 router.get("/slug/:slug", getPostBySlug);
 router.put("/:id", protect, adminOnly, updatePost);
 router.delete("/:id", protect, adminOnly, deletePost);

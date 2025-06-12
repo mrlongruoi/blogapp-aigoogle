@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import DashboardLayout from "../../components/layouts/DashboardLayout";
 
 import { LuGalleryVerticalEnd, LuLoaderCircle, LuPlus } from "react-icons/lu";
@@ -28,7 +28,7 @@ const BlogPosts = () => {
   });
 
   // fetch all blog posts
-  const getAllPosts = async (pageNumber = 1) => {
+  const getAllPosts = useCallback(async (pageNumber = 1) => {
     try {
       setIsLoading(true);
       const response = await axiosInstance.get(API_PATHS.POSTS.GET_ALL, {
@@ -61,7 +61,7 @@ const BlogPosts = () => {
     } finally {
       setIsLoading(false);
     }
-  };
+  }, [filterStatus]);
 
   // delete blog post
   const deletePost = async (postId) => {
@@ -89,7 +89,7 @@ const BlogPosts = () => {
   useEffect(() => {
     getAllPosts(1);
     return () => {};
-  }, [filterStatus]);
+  }, [filterStatus, getAllPosts]);
 
   return (
     <DashboardLayout activeMenu="Blog Posts">

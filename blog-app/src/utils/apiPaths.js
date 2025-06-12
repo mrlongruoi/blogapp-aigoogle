@@ -1,4 +1,4 @@
-export const BASE_URL = "https://blogapp-ai-google.onrender.com";
+export const BASE_URL = "https://blogapp-aigoogle.onrender.com";
 
 export const API_PATHS = {
   AUTH: {
